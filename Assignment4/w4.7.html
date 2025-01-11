@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Travel Booking Form</title>
+    <script>
+      function calculateTotalCost() {
+        const numTravelers = parseInt(
+          document.getElementById("numTravelers").value
+        );
+        const travelClass = document.querySelector(
+          'input[name="travelClass"]:checked'
+        ).value;
+        const basePrice = 100; // Example base price per traveler in Economy class
+
+        let priceMultiplier;
+        switch (travelClass) {
+          case "Economy":
+            priceMultiplier = 1;
+            break;
+          case "Business":
+            priceMultiplier = 2;
+            break;
+          case "First Class":
+            priceMultiplier = 3;
+            break;
+        }
+
+        const totalPrice = numTravelers * basePrice * priceMultiplier;
+        document.getElementById("totalPrice").textContent =
+          "Total Cost: $" + totalPrice.toFixed(2);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Travel Booking Form</h1>
+
+    <form>
+      <label for="fullName">Full Name:</label><br />
+      <input type="text" id="fullName" name="fullName" required /><br /><br />
+
+      <label for="contact">Contact Information:</label><br />
+      <input type="text" id="contact" name="contact" required /><br /><br />
+
+      <label for="destination">Destination:</label><br />
+      <select id="destination" name="destination">
+        <option value="New York">New York</option>
+        <option value="London">London</option>
+        <option value="Paris">Paris</option>
+        <option value="Tokyo">Tokyo</option></select
+      ><br /><br />
+
+      <label for="startDate">Start Date:</label><br />
+      <input type="date" id="startDate" name="startDate" required /><br /><br />
+
+      <label for="endDate">End Date:</label><br />
+      <input type="date" id="endDate" name="endDate" required /><br /><br />
+
+      <label for="numTravelers">Number of Travelers:</label><br />
+      <input
+        type="number"
+        id="numTravelers"
+        name="numTravelers"
+        min="1"
+        value="1"
+        onchange="calculateTotalCost()"
+      /><br /><br />
+
+      <label>Travel Class:</label><br />
+      <input
+        type="radio"
+        id="economy"
+        name="travelClass"
+        value="Economy"
+        checked
+        onchange="calculateTotalCost()"
+      />
+      <label for="economy">Economy</label><br />
+      <input
+        type="radio"
+        id="business"
+        name="travelClass"
+        value="Business"
+        onchange="calculateTotalCost()"
+      />
+      <label for="business">Business</label><br />
+      <input
+        type="radio"
+        id="firstClass"
+        name="travelClass"
+        value="First Class"
+        onchange="calculateTotalCost()"
+      />
+      <label for="firstClass">First Class</label><br /><br />
+
+      <input type="checkbox" id="travelInsurance" name="travelInsurance" />
+      <label for="travelInsurance">Travel Insurance</label><br /><br />
+
+      <p id="totalPrice"></p>
+
+      <button type="submit">Book Now</button>
+    </form>
+  </body>
+</html>

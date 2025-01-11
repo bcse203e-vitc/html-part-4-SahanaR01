@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Online Quiz</title>
+    <script>
+      let remainingTime = 600; // 10 minutes in seconds
+      const timerElement = document.getElementById("timer");
+
+      function startTimer() {
+        const intervalId = setInterval(() => {
+          remainingTime--;
+          const minutes = Math.floor(remainingTime / 60);
+          const seconds = remainingTime % 60;
+          timerElement.placeholder = `Time Remaining: ${minutes}:${seconds
+            .toString()
+            .padStart(2, "0")}`;
+
+          if (remainingTime === 0) {
+            clearInterval(intervalId);
+            alert("Time's up!");
+            // You can also submit the form automatically here
+            document.querySelector("form").submit();
+          }
+        }, 1000);
+      }
+
+      window.onload = startTimer; // Start the timer when the page loads
+    </script>
+  </head>
+  <body>
+    <h1>Online Quiz</h1>
+
+    <form>
+      <label for="name">Name:</label><br />
+      <input type="text" id="name" name="name" required /><br /><br />
+
+      <label for="email">Email:</label><br />
+      <input type="email" id="email" name="email" required /><br /><br />
+
+      <h3>Question 1:</h3>
+      <p>What is the capital of France?</p>
+      <input type="radio" id="q1_paris" name="q1" value="Paris" />
+      <label for="q1_paris">Paris</label><br />
+      <input type="radio" id="q1_london" name="q1" value="London" />
+      <label for="q1_london">London</label><br />
+      <input type="radio" id="q1_berlin" name="q1" value="Berlin" />
+      <label for="q1_berlin">Berlin</label><br /><br />
+
+      <h3>Question 2:</h3>
+      <p>Which of the following are programming languages?</p>
+      <input type="checkbox" id="q2_python" name="q2[]" value="Python" />
+      <label for="q2_python">Python</label><br />
+      <input type="checkbox" id="q2_java" name="q2[]" value="Java" />
+      <label for="q2_java">Java</label><br />
+      <input type="checkbox" id="q2_html" name="q2[]" value="HTML" />
+      <label for="q2_html">HTML</label><br />
+      <input type="checkbox" id="q2_music" name="q2[]" value="Music" />
+      <label for="q2_music">Music</label><br /><br />
+
+      <input
+        type="text"
+        id="timer"
+        placeholder="Time Remaining: 10:00"
+        readonly
+        disabled
+      /><br /><br />
+
+      <button type="submit">Submit Quiz</button>
+    </form>
+  </body>
+</html>
