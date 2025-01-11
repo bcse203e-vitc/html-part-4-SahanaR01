@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hotel Booking Form</title>
+    <script>
+      function calculateTotalCost() {
+        const numGuests = parseInt(document.getElementById("numGuests").value);
+        const roomType = document.getElementById("roomType").value;
+        const basePrices = {
+          Single: 50,
+          Double: 80,
+          Suite: 150,
+        };
+        const services = {
+          Breakfast: 15,
+          AirportPickup: 50,
+        };
+        let totalCost = numGuests * basePrices[roomType];
+
+        const checkboxes = document.querySelectorAll(
+          'input[type="checkbox"]:checked'
+        );
+        checkboxes.forEach((checkbox) => {
+          totalCost += services[checkbox.value];
+        });
+
+        document.getElementById("totalPrice").textContent =
+          "Total Cost: $" + totalCost.toFixed(2);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Hotel Booking Form</h1>
+
+    <form>
+      <label for="name">Full Name:</label><br />
+      <input type="text" id="name" name="name" required /><br /><br />
+
+      <label for="contact">Contact Information:</label><br />
+      <input type="text" id="contact" name="contact" required /><br /><br />
+
+      <label for="checkIn">Check-in Date:</label><br />
+      <input type="date" id="checkIn" name="checkIn" required /><br /><br />
+
+      <label for="checkOut">Check-out Date:</label><br />
+      <input type="date" id="checkOut" name="checkOut" required /><br /><br />
+
+      <label for="numGuests">Number of Guests:</label><br />
+      <input
+        type="number"
+        id="numGuests"
+        name="numGuests"
+        min="1"
+        value="1"
+        onchange="calculateTotalCost()"
+      /><br /><br />
+
+      <label for="roomType">Room Type:</label><br />
+      <select id="roomType" name="roomType" onchange="calculateTotalCost()">
+        <option value="Single">Single</option>
+        <option value="Double">Double</option>
+        <option value="Suite">Suite</option></select
+      ><br /><br />
+
+      <label>Additional Services:</label><br />
+      <input
+        type="checkbox"
+        id="breakfast"
+        name="services[]"
+        value="Breakfast"
+        onchange="calculateTotalCost()"
+      />
+      <label for="breakfast">Breakfast</label><br />
+      <input
+        type="checkbox"
+        id="airportPickup"
+        name="services[]"
+        value="AirportPickup"
+        onchange="calculateTotalCost()"
+      />
+      <label for="airportPickup">Airport Pickup</label><br /><br />
+
+      <p id="totalPrice"></p>
+
+      <button type="submit">Book Now</button>
+    </form>
+  </body>
+</html>

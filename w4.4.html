@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Job Application</title>
+  </head>
+  <body>
+    <h1>Job Application</h1>
+
+    <div id="page1">
+      <h3>Page 1: Personal Details</h3>
+      <form>
+        <label for="name">Full Name:</label><br />
+        <input type="text" id="name" name="name" required /><br /><br />
+
+        <label for="address">Address:</label><br />
+        <textarea
+          id="address"
+          name="address"
+          rows="4"
+          cols="50"
+          required
+        ></textarea
+        ><br /><br />
+
+        <label for="phone">Phone Number:</label><br />
+        <input type="tel" id="phone" name="phone" required /><br /><br />
+
+        <label for="email">Email:</label><br />
+        <input type="email" id="email" name="email" required /><br /><br />
+
+        <button type="button" onclick="nextPage()">Next</button>
+      </form>
+    </div>
+
+    <div id="page2" style="display: none">
+      <h3>Page 2: Educational Background</h3>
+      <form>
+        <label for="degree">Degree:</label><br />
+        <input type="text" id="degree" name="degree" required /><br /><br />
+
+        <label for="yearOfPassing">Year of Passing:</label><br />
+        <input
+          type="number"
+          id="yearOfPassing"
+          name="yearOfPassing"
+          min="1900"
+          max="2025"
+          required
+        /><br /><br />
+
+        <label for="institution">Institution Name:</label><br />
+        <input
+          type="text"
+          id="institution"
+          name="institution"
+          required
+        /><br /><br />
+
+        <button type="button" onclick="prevPage()">Previous</button>
+        <button type="button" onclick="nextPage()">Next</button>
+      </form>
+    </div>
+
+    <div id="page3" style="display: none">
+      <h3>Page 3: Work Experience</h3>
+      <form>
+        <label for="companyName">Company Name:</label><br />
+        <input type="text" id="companyName" name="companyName" /><br /><br />
+
+        <label for="designation">Designation:</label><br />
+        <input type="text" id="designation" name="designation" /><br /><br />
+
+        <label for="duration">Duration:</label><br />
+        <input
+          type="text"
+          id="duration"
+          name="duration"
+          placeholder="e.g., Jan 2020 - Present"
+        /><br /><br />
+
+        <label for="resume">Upload Resume:</label><br />
+        <input type="file" id="resume" name="resume" /><br /><br />
+
+        <button type="button" onclick="prevPage()">Previous</button>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <script>
+      function nextPage() {
+        var current = document.querySelector(".show");
+        current.style.display = "none";
+        var next = current.nextElementSibling;
+        next.style.display = "block";
+        current.classList.remove("show");
+        next.classList.add("show");
+      }
+
+      function prevPage() {
+        var current = document.querySelector(".show");
+        current.style.display = "none";
+        var prev = current.previousElementSibling;
+        prev.style.display = "block";
+        current.classList.remove("show");
+        prev.classList.add("show");
+      }
+
+      // Show the first page initially
+      document.getElementById("page1").style.display = "block";
+      document.getElementById("page1").classList.add("show");
+    </script>
+  </body>
+</html>

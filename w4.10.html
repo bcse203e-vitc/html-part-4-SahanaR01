@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Customizable Form Template</title>
+  </head>
+  <body>
+    <h1>Customizable Form Template</h1>
+
+    <form id="formConfig">
+      <label for="formName">Form Name:</label><br />
+      <input type="text" id="formName" name="formName" required /><br /><br />
+
+      <label for="numFields">Number of Input Fields:</label><br />
+      <input
+        type="number"
+        id="numFields"
+        name="numFields"
+        min="1"
+        value="1"
+        onchange="generateFields()"
+      /><br /><br />
+
+      <div id="fieldContainer"></div>
+
+      <button type="button" onclick="generateFields()">Generate Fields</button>
+      <button type="button" onclick="previewForm()">Preview Form</button>
+    </form>
+
+    <div id="formPreview" style="display: none">
+      <h2>Form Preview</h2>
+      <form id="previewForm"></form>
+    </div>
+
+    <script>
+      function generateFields() {
+        const numFields = parseInt(document.getElementById("numFields").value);
+        const fieldContainer = document.getElementById("fieldContainer");
+        fieldContainer.innerHTML = "";
+
+        for (let i = 1; i <= numFields; i++) {
+          const fieldDiv = document.createElement("div");
+          fieldDiv.innerHTML = `
+      <label for="fieldLabel${i}">Field Label ${i}:</label><br>
+      <input type="text" id="fieldLabel${i}" name="fieldLabel${i}"><br>
+      <label for="fieldType${i}">Field Type ${i}:</label><br>
+      <select id="fieldType${i}" name="fieldType${i}">
+        <option value="text">Text</option>
+        <option value="email">Email</option>
+        <option value="number">Number</option>
+        <option value="date">Date</option>
+      </select><br><br>
+    `;
+          fieldContainer.appendChild(fieldDiv);
+        }
+      }
+
+      function previewForm() {
+        const formName = document.getElementById("formName").value;
+        const numFields = parseInt(document.getElementById("numFields").value);
+        const previewForm = document.getElementById("previewForm");
+        previewForm.innerHTML = "";
+
+        for (let i = 1; i <= numFields; i++) {
+          const fieldLabel = document.getElementById(`fieldLabel${i}`).value;
+          const fieldType = document.getElementById(`fieldType${i}`).value;
+
+          const fieldDiv = document.createElement("div");
+          fieldDiv.innerHTML = `
+      <label for="previewField${i}">${fieldLabel}:</label><br>
+      <input type="${fieldType}" id="previewField${i}" name="previewField${i}"><br><br>
+    `;
+          previewForm.appendChild(fieldDiv);
+        }
+
+        document.getElementById("formPreview").style.display = "block";
+      }
+    </script>
+  </body>
+</html>
